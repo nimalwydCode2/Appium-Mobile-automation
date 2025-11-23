@@ -18,7 +18,7 @@ class ScrollUtils {
         "new UiScrollable(new UiSelector().scrollable(true))" +
         ".scrollTextIntoView(\"" + text + "\")"));
   }
-// platform independent, but slower than platform specific scroll approach
+  // platform independent, but slower than platform specific scroll approach
  public
   void scrollToElement(MobileElement element) {
     int maxScrolls = 5;
@@ -32,4 +32,7 @@ class ScrollUtils {
       count++;
     }
   }
+
+ public
+  void pressKeyCode(int keyCode) { driver.pressKey(new KeyEvent(keyCode)); }
 }
