@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AppiumSuite">
+  <listeners>
+    <listener class-name="reporting.AllureListener"/>
+  </listeners>
+  <test name="AndroidTests">
+    <classes>
+      <class name="tests.HomeTests"/>
+      <class name="tests.SettingsTests"/>
+    </classes>
+  </test>
+</suite>

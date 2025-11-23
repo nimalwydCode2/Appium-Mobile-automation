@@ -1,0 +1,1 @@
+Place your sample-app.apk or .app files here for CI/local runs.
