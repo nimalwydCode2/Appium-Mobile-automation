@@ -20,9 +20,6 @@ public class TestListener implements ITestListener {
             BaseTest base = (BaseTest) instance;
             byte[] screenshot = ScreenshotUtils.takeScreenshot(base.driver);
             String b64 = Base64.getEncoder().encodeToString(screenshot);
-            // Add screenshot to extent - this will be done where Extent test is used
         }
     }
-
-    // other listener methods can be implemented as needed
 }

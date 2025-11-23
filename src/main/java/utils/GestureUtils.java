@@ -6,16 +6,14 @@ import java.util.Collections;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.PointerInput;
 
-public
-class GestureUtils {
- private
-  AppiumDriver driver;
- public
-  GestureUtils(AppiumDriver driver) { this.driver = driver; }
+public class GestureUtils {
+  private AppiumDriver driver;
+  public GestureUtils(AppiumDriver driver) {
+    this.driver = driver;
+  }
 
   // Swipe in any direction w3c
- public
-  void swipe(int startX, int startY, int endX, int endY) {
+  public void swipe(int startX, int startY, int endX, int endY) {
     PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
     Sequence swipe = new Sequence(finger, 1);
     swipe.addAction(finger.createPointerMove(
@@ -30,8 +28,7 @@ class GestureUtils {
   }
 
   // Swipe using touch action, deprecated
- public
-  void swipeOld(int startX, int startY, int endX, int endY) {
+  public void swipeOld(int startX, int startY, int endX, int endY) {
     new TouchAction(driver)
         .press(PointOption.point(startX, startY))
         .waitAction(WaitOptions.waitOptions(Duration.ofMillis(SWIPE_DURATION)))
@@ -40,21 +37,24 @@ class GestureUtils {
         .perform();
   }
 
- public
-  void swipeUp() { swipe(500, 1500, 500, 300); }
+  public void swipeUp() {
+    swipe(500, 1500, 500, 300);
+  }
 
- public
-  void swipeDown() { swipe(500, 300, 500, 1500); }
+  public void swipeDown() {
+    swipe(500, 300, 500, 1500);
+  }
 
- public
-  void swipeLeft() { swipe(900, 800, 100, 800); }
+  public void swipeLeft() {
+    swipe(900, 800, 100, 800);
+  }
 
- public
-  void swipeRight() { swipe(100, 800, 900, 800); }
+  public void swipeRight() {
+    swipe(100, 800, 900, 800);
+  }
 
   // Tap action using w3c
- public
-  void tap(MobileElement element) {
+  public void tap(MobileElement element) {
     PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
     Sequence tap = new Sequence(finger, 1);
     // Get element center coordinates
@@ -72,14 +72,12 @@ class GestureUtils {
   }
 
   // tap using touch action, deprecated
- public
-  void tapElement(MobileElement element) {
+  public void tapElement(MobileElement element) {
     new TouchAction(driver).tap(ElementOption.element(element)).perform();
   }
 
   // Long press using w3c
- public
-  void longPressW3C(MobileElement element, int durationSeconds) {
+  public void longPressW3C(MobileElement element, int durationSeconds) {
     PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
     Sequence longPress = new Sequence(finger, 1);
     int x = element.getCenter().getX();
@@ -90,15 +88,14 @@ class GestureUtils {
         finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
     longPress.addAction(
         finger.createPointerMove(Duration.ofSeconds(durationSeconds),
-                                 PointerInput.Origin.viewport(), x, y));
+            PointerInput.Origin.viewport(), x, y));
     longPress.addAction(
         finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
     driver.perform(Arrays.asList(longPress));
   }
 
   // Long press using Touch action
- public
-  void longPressElement(MobileElement element, int durationSeconds) {
+  public void longPressElement(MobileElement element, int durationSeconds) {
     new TouchAction(driver)
         .longPress(ElementOption.element(element))
         .waitAction(
@@ -109,8 +106,7 @@ class GestureUtils {
 
   // Zoom in, w3c
   // Multi-touch: Pinch out
- public
-  void zoomIn(Point center) {
+  public void zoomIn(Point center) {
     // Distance between the two fingers at the start
     int startOffset = 50;
     // Distance fingers will move outward
@@ -125,32 +121,27 @@ class GestureUtils {
     PointerInput finger2 = new PointerInput(PointerInput.Kind.TOUCH, "finger2");
     Sequence seq1 = new Sequence(finger1, 1);
     seq1.addAction(finger1.createPointerMove(Duration.ZERO,
-                                             PointerInput.Origin.viewport(),
-                                             finger1Start.x, finger1Start.y));
+        PointerInput.Origin.viewport(), finger1Start.x, finger1Start.y));
     seq1.addAction(
         finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
     seq1.addAction(finger1.createPointerMove(Duration.ofMillis(300),
-                                             PointerInput.Origin.viewport(),
-                                             finger1End.x, finger1End.y));
+        PointerInput.Origin.viewport(), finger1End.x, finger1End.y));
     seq1.addAction(
         finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
     Sequence seq2 = new Sequence(finger2, 1);
     seq2.addAction(finger2.createPointerMove(Duration.ZERO,
-                                             PointerInput.Origin.viewport(),
-                                             finger2Start.x, finger2Start.y));
+        PointerInput.Origin.viewport(), finger2Start.x, finger2Start.y));
     seq2.addAction(
         finger2.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
     seq2.addAction(finger2.createPointerMove(Duration.ofMillis(300),
-                                             PointerInput.Origin.viewport(),
-                                             finger2End.x, finger2End.y));
+        PointerInput.Origin.viewport(), finger2End.x, finger2End.y));
     seq2.addAction(
         finger2.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-    ((AppiumDriver)driver).perform(Arrays.asList(seq1, seq2));
+    ((AppiumDriver) driver).perform(Arrays.asList(seq1, seq2));
   }
 
   // Zoom in, Touch action, deprecated
- public
-  void zoomInTouchAction(int centerX, int centerY, int distance) {
+  public void zoomInTouchAction(int centerX, int centerY, int distance) {
     // Finger 1 moves up-left
     TouchAction finger1 =
         new TouchAction(driver)
@@ -171,8 +162,7 @@ class GestureUtils {
 
   // Zoom out
   // Multi-touch: Pinch in
- public
-  void zoomOut(Point center) {
+  public void zoomOut(Point center) {
     // Distance between the two fingers at the start (wider apart)
     int startOffset = 150;
     // Distance fingers move inward (toward center)
@@ -187,32 +177,27 @@ class GestureUtils {
     PointerInput finger2 = new PointerInput(PointerInput.Kind.TOUCH, "finger2");
     Sequence seq1 = new Sequence(finger1, 1);
     seq1.addAction(finger1.createPointerMove(Duration.ZERO,
-                                             PointerInput.Origin.viewport(),
-                                             finger1Start.x, finger1Start.y));
+        PointerInput.Origin.viewport(), finger1Start.x, finger1Start.y));
     seq1.addAction(
         finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
     seq1.addAction(finger1.createPointerMove(Duration.ofMillis(300),
-                                             PointerInput.Origin.viewport(),
-                                             finger1End.x, finger1End.y));
+        PointerInput.Origin.viewport(), finger1End.x, finger1End.y));
     seq1.addAction(
         finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
     Sequence seq2 = new Sequence(finger2, 1);
     seq2.addAction(finger2.createPointerMove(Duration.ZERO,
-                                             PointerInput.Origin.viewport(),
-                                             finger2Start.x, finger2Start.y));
+        PointerInput.Origin.viewport(), finger2Start.x, finger2Start.y));
     seq2.addAction(
         finger2.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
     seq2.addAction(finger2.createPointerMove(Duration.ofMillis(300),
-                                             PointerInput.Origin.viewport(),
-                                             finger2End.x, finger2End.y));
+        PointerInput.Origin.viewport(), finger2End.x, finger2End.y));
     seq2.addAction(
         finger2.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-    ((AppiumDriver)driver).perform(Arrays.asList(seq1, seq2));
+    ((AppiumDriver) driver).perform(Arrays.asList(seq1, seq2));
   }
 
   // Zoom out touch action deprecated
- public
-  void zoomOutTouchAction(int centerX, int centerY, int distance) {
+  public void zoomOutTouchAction(int centerX, int centerY, int distance) {
     // Finger 1 moves downward toward center
     TouchAction finger1 =
         new TouchAction(driver)
