@@ -2,7 +2,6 @@ package utils;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,27 +16,7 @@ class GeneralUtils {
   GeneralUtils(AppiumDriver<MobileElement> driver) { this.driver = driver; }
 
  public
-  void switchToWebView() {
-    Set<String> contextNames = driver.getContextHandles();
-    for (String contextName : contextNames) {
-      if (contextName.contains("WEBVIEW")) {
-        driver.context(contextName);
-        break;
-      }
-    }
-  }
-
- public
   String getCurrentActivity() { return driver.currentActivity(); }
-
-  // Scroll Using UIAutomator
-  // Scroll until element with text is visible
- public
-  void scrollToText(String text) {
-    driver.findElementByAndroidUIAutomator(
-        "new UiScrollable(new UiSelector().scrollable(true))" +
-        ".scrollTextIntoView(\"" + text + "\")");
-  }
 
   // Drag and Drop
  public
@@ -65,6 +44,7 @@ class GeneralUtils {
  public
   void openNotifications() { driver.openNotifications(); }
 
+  // Switch to webview
  public
   void switchToWebView() {
     Set<String> contextNames = driver.getContextHandles();
@@ -76,6 +56,7 @@ class GeneralUtils {
     }
   }
 
+  // Switch to Native view
  public
   void switchToNativeView() {
     Set<String> contextNames = driver.getContextHandles();
@@ -87,7 +68,7 @@ class GeneralUtils {
     }
   }
 
-  // Or simply
+  // Switch to native view alternate way
  public
   void switchToNative() { driver.context("NATIVE_APP"); }
 }

@@ -2,7 +2,6 @@ package utils;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

@@ -1,10 +1,8 @@
 package utils;
 
 import io.appium.java_client.AppiumDriver;
-
 import java.util.Arrays;
 import java.util.Collections;
-
 import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.PointerInput;
 
